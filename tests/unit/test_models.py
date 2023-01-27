@@ -143,16 +143,17 @@ def test_posts_can_be_just_links_without_body(test_db, test_user):
     new_post = Post(title=title, link=True, url="http://wou.edu")
     assert new_post.link
 
-def test_post_votes_none_is_0():
-    new_post = Post(title="Foo", body="body")
+def test_posts_down_vote_decreases_votes(test_db, test_user):
+    new_comment = Post(title="Foo", body="body", vote_count = 4)
+    new_comment.down_vote(test_user)
+    assert new_comment.vote_count == 3
 
-def test_posts_down_vote_decreases_votes():
-    new_post = Post(title="Foo", body="body")
+def test_comment_down_vote_decreases_votes(test_db, test_user):
+    new_comment = Comment(vote_count = 4)
+    new_comment.down_vote(test_user)
+    assert new_comment.vote_count == 3
 
-def test_comment_votes_none_is_0():
-    new_post = Post(id=0, title="Foo", body="body")
-    new_comment = Comment(post_id = 0)
-
-def test_comment_down_vote_decreases_votes():
-    new_post = Post(id=0, title="Foo", body="body")
-    new_comment = Comment(post_id = 0)
+def test_post_none_to_zero(test_db):
+    new_post = Post(title="", body="", vote_count=None)
+    new_post.adjust_vote(1)
+    assert new_post.vote_count == 1
