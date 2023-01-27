@@ -297,3 +297,15 @@ def test_link_posts_should_have_link_to_url(client, test_user):
     db.session.commit()
     response = client.get(url_for("post", post_id=link_post.id))
     assert link_post.url.encode() in response.data
+
+def test_post_up_vote_return_redirect_index():
+    pass
+
+def test_post_down_vote_return_redirect_index():
+    pass
+
+def test_comment_up_vote_return_redirect_index():
+    pass
+
+def test_comment_down_vote_return_redirect_index():
+    pass
