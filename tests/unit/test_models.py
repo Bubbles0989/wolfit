@@ -59,7 +59,7 @@ def test_recent_posts_should_be_ordered(test_db, test_user, single_post):
     db.session.add(p)
     db.session.commit()
     assert p.title == Post.recent_posts()[0].title
-    assert single_post.title == Post.recent_posts()[-1].title
+    assert single_post.title == Post.recent_posts()[1].title
 
 
 def test_posts_should_have_a_vote_count():

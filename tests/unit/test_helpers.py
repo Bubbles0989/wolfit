@@ -17,4 +17,6 @@ def test_second_diff_less_7200():
     pass
 
 def test_second_diff_less_86400():
-    pass
+    new_int = 77777
+    new_string = less_than_day(new_int)
+    assert new_string == str(new_int // 3600) + " hours ago"
