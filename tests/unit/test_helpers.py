@@ -5,7 +5,7 @@ from datetime import date
 from app import db
 from app.helpers import less_than_day, pretty_date
 
-# less than day 
+# less_than_day 
 
 def test_second_diff_less_60():
     new_int = 45
@@ -32,7 +32,7 @@ def test_second_diff_less_86400():
     new_string = less_than_day(new_int)
     assert new_string == str(new_int // 3600) + " hours ago"
 
-# pretty date
+# pretty_date
 
 def test_time_is_int():
     now = datetime.utcnow()
