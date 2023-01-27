@@ -10,6 +10,23 @@ from app.models import ActivityLog, Category, Comment, Post, User
 
 PASSWORD = "yoko"
 
+def test_post_up_vote(client, test_user, single_post):
+    login(client, test_user.username, PASSWORD)
+    this_post_id = single_post.id
+    response = client.get(url_for("up_vote", post_id=this_post_id))
+    assert response.status_code == 302
+    e = ActivityLog.latest_entry()
+    assert e is not None
+    assert test_user.id == e.user_id
+
+def test_post_down_vote(client, test_user, single_post):
+    login(client, test_user.username, PASSWORD)
+    this_post_id = single_post.id
+    response = client.get(url_for("down_vote", post_id=this_post_id))
+    assert response.status_code == 302
+    e = ActivityLog.latest_entry()
+    assert e is not None
+    assert test_user.id == e.user_id
 
 def login(client, username, password):
     return client.post(
@@ -297,15 +314,3 @@ def test_link_posts_should_have_link_to_url(client, test_user):
     db.session.commit()
     response = client.get(url_for("post", post_id=link_post.id))
     assert link_post.url.encode() in response.data
-
-def test_post_up_vote_return_redirect_index():
-    pass
-
-def test_post_down_vote_return_redirect_index():
-    pass
-
-def test_comment_up_vote_return_redirect_index():
-    pass
-
-def test_comment_down_vote_return_redirect_index():
-    pass
