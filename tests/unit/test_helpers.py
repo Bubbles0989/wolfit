@@ -1,8 +1,10 @@
-import textwrap
 from datetime import timedelta
+from datetime import datetime
 
 from app import db
 from app.helpers import less_than_day, pretty_date
+
+# less than day 
 
 def test_second_diff_less_60():
     new_int = 45
@@ -28,3 +30,11 @@ def test_second_diff_less_86400():
     new_int = 77777
     new_string = less_than_day(new_int)
     assert new_string == str(new_int // 3600) + " hours ago"
+
+# pretty date
+
+def test_time_is_int_returns_now():
+    pass
+
+def test_time_is_now():
+    pass
