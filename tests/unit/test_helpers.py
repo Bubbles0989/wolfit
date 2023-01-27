@@ -48,9 +48,6 @@ def test_time_is_false():
     return_string = pretty_date(test_time)
     assert return_string == "just now"
 
-def test_time_is_less_than_0_more_than_neg_1():
-    pass
-
 def test_time_is_yesterday():
     today = datetime.utcnow()
     yesterday = today - timedelta(days = 1)
@@ -58,13 +55,29 @@ def test_time_is_yesterday():
     assert return_string == "Yesterday"
 
 def test_time_is_days_ago():
-    pass
+    today = datetime.utcnow()
+    days_diff = 4
+    days_ago = today - timedelta(days_diff)
+    return_string = pretty_date(days_ago)
+    assert return_string == str(days_diff) + " days ago"
 
 def test_time_is_weeks_ago():
-    pass
+    today = datetime.utcnow()
+    days_diff = 14
+    days_ago = today - timedelta(days_diff)
+    return_string = pretty_date(days_ago)
+    assert return_string == str(days_diff // 7) + " weeks ago"
 
 def test_time_is_months_ago():
-    pass
+    today = datetime.utcnow()
+    days_diff = 64
+    days_ago = today - timedelta(days_diff)
+    return_string = pretty_date(days_ago)
+    assert return_string == str(days_diff // 30) + " months ago"
 
 def test_time_is_years_ago():
-    pass
+    today = datetime.utcnow()
+    days_diff = 972
+    days_ago = today - timedelta(days_diff)
+    return_string = pretty_date(days_ago)
+    assert return_string == str(days_diff // 365) + " years ago"

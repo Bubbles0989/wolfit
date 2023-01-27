@@ -2,7 +2,7 @@ import textwrap
 from datetime import timedelta
 
 from app import db
-from app.models import Category, Post, User
+from app.models import Category, Post, User, Comment
 
 
 def test_new_user():
@@ -142,3 +142,17 @@ def test_posts_can_be_just_links_without_body(test_db, test_user):
     title = "Link post"
     new_post = Post(title=title, link=True, url="http://wou.edu")
     assert new_post.link
+
+def test_post_votes_none_is_0():
+    new_post = Post(title="Foo", body="body")
+
+def test_posts_down_vote_decreases_votes():
+    new_post = Post(title="Foo", body="body")
+
+def test_comment_votes_none_is_0():
+    new_post = Post(id=0, title="Foo", body="body")
+    new_comment = Comment(post_id = 0)
+
+def test_comment_down_vote_decreases_votes():
+    new_post = Post(id=0, title="Foo", body="body")
+    new_comment = Comment(post_id = 0)
