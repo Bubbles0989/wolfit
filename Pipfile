@@ -16,6 +16,7 @@ flask-bootstrap = "*"
 urllib3 = "*"
 email-validator = "*"
 importlib-resources = "*"
+httpie = "*"
 
 [dev-packages]
 "flake8" = "*"
