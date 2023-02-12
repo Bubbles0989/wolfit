@@ -5,6 +5,7 @@ from flask import url_for
 
 import pytest
 
+
 from app import app, db
 from app.models import ActivityLog, Category, Comment, Post, User
 
