@@ -14,7 +14,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app import app, db, login
 from app.helpers import pretty_date
 
-url = app.config['LOGGER_URL']
+logger_url = app.config['LOGGER_URL']
 
 user_vote = db.Table(
     "user_vote",
@@ -192,7 +192,7 @@ class ActivityLog(db.Model):
         new_activity = {'user_id': int(user_id), 'details': str(details)}
         new_activity = json.dumps(new_activity)
 
-        post_url = url + "/api/activities"
+        post_url = logger_url + "/api/activities"
         try:
             r = requests.post(post_url, json=new_activity)
             if r.status_code == 201:
@@ -202,7 +202,7 @@ class ActivityLog(db.Model):
             else:
                 print(f"Post new activity FAILURE: {r.text}")
         except requests.exceptions.RequestException:
-            print(f"Could not connect to activity log service at {url}")
+            print(f"Could not connect to activity log service at {logger_url}")
 
 @login.user_loader
 def load_user(user_id):
